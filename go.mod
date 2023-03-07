@@ -1,4 +1,4 @@
-module github.com/krakentech/ktech_project_template
+module github.com/twoodby/goutils
 
 go 1.19
 
