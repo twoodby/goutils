@@ -1,6 +1,9 @@
 package goutils
 
-import "strconv"
+import (
+	"encoding/binary"
+	"strconv"
+)
 
 func Int64FromString(in string) int64 {
 	out, err := strconv.ParseInt(in, 10, 64)
@@ -11,8 +14,11 @@ func Int64FromString(in string) int64 {
 }
 
 func Int64ToBytes(in int64) []byte {
-	if in > 0 {
-		return []byte(strconv.FormatInt(in, 10))
-	}
-	return nil
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b, uint64(in))
+	return b
+}
+
+func Int64FromBytes(in []byte) int64 {
+	return int64(binary.BigEndian.Uint64(in))
 }
